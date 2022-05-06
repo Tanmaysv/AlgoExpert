@@ -1,0 +1,10 @@
+1) What features are we building in this system ?
+2) Are we looking to build a global api ?
+3) Number of concurrent users ?
+4) Are we building payment features, calling feature etc. or just booking a cab ?
+5) Should we also build some system that predicts shortest route to a destination ?
+6) Are we looking to give users multiple car choices option or just the cab for now ?
+7) Highly available ?
+8) Amount of acceptable latency ?
+9) Would this api support booking recurring cab say daily/monthly ?
+10) Do we have to build service that calculates the cost from source to destination or will that be provided?

@@ -1,0 +1,11 @@
+1) What features would you like me to build for this system. Just the video streaming or things like
+recommendation and payment features etc ?
+2) Is this a global application supported across multiple regions ?
+3) Number of concurrent users that can use the app and that can view the same video ?
+4) Max latency allowed ?
+5) When we discuss about content what kind of data are we discussing just the video or images as well ?
+6) Should the system be highly available ?
+7) Do we also need to think about acl's and route say users who havent payed the subscription to see
+different content ?
+8) If user in the middle of watching a video, clicks the back button, do we need to think about
+cancelling api call ?

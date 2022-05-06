@@ -1,0 +1,63 @@
+Requirements gathered after asking questions
+5 - 10 regions, 100k machines, 2-3 nines availability, 30 mins entire deploy, 1000's of deploys/day,
+10GB per binary
+
+Two parts to the system
+1) Build step
+2) Deploy step
+
+1) BUILD STEP:
+We will have a server node and multiple worker nodes (say 100 worker nodes).
+As soon as the user clicks on the build button, we will create jobs. Here a queue logic can be used.
+So whichever job comes first to us that will be taken first by whichever worker node is free. Now
+instead of keeping queue on memory since we need the status of jobs we will keep a sql database.
+Why sql ? We need Atomicity ie if a job is picked up we need to update the status, so we need either
+ both steps to complete or none and we need to have locks, i.e if a worker is reading the database
+we dont want other worker to read the database at the same time since they might pick up the same
+job
+
+The columns can be id, job_name, created_at, status. Status can be an enum of(queued, running, failed,
+stopped, success).
+Each worker will run the following query in order to determine which job to pick up. And once picked up
+will update the status to running
+BEGIN TRANSACTION
+SELECT * FROM JOBS_TABLE WHERE STATUS = "QUEUED" AND ORDER BY (CREATED_AT) ASC LIMIT 1
+
+INSERT INTO JOBS_TABLE WHERE id = our_id status = "RUNNING"
+COMMIT;
+END TRANSACTION
+
+To speed up the read process we can index the created_at and status column
+
+Quantifying: 100 workers lets say in worst case going to the db every 5 sec. So there is 100 transactions
+every 5 sec i.e. 20 transactions/sec which is normal for sql db to handle.
+
+Here we need to think about an error case. What if a worker node picks up the job but then goes
+down. The job status is in running and hence no other worker node would pick this job, so it would
+be perpetually in running state.
+
+Solution:
+Add addition column called last_heart_beat in the jobs table. Then have worker nodes update this column for the
+job which they are running every 3 to 5 mins(configurable). Then have few auxilliary services that monitor
+the jobs table and gets all job which are running and whose last_hear_beat time is exceeded threshold
+value and fail the job.
+eg: select * from jobs where status = "RUNNING" and last_heart_beat - time.now() > 20 mins.
+
+Quantifying:
+5000 builds/day, 100 builds per day per worker
+which would mean 5000/100 = 50 worker machines.
+
+Once job is processed by worker node it can store the data in to some blob store like S3 or GCS
+
+For multi regions, each region will have their own blob stores. Once you update GCS of one region, we can
+have asynchronous process to update data in other region. So workers are not blocked till data is replicated.
+Now if the requirement is to only allow deploying of builds that has been replicated to all blob stores
+have a separate service which checks if the new build arrives in GCS if that is replicated in all stores
+and update the table which has column build_name, status
+
+2) DEPLOY STEP: (Check img)
+100k machines downloading build sequentially is not feasible. So we use P2P network.
+We can use something like zookeeper which stores global KV config with info of current build that needs to
+be downloaded. { b_v: b1 }. Now if user clicks build 2 then the global KV config is updated which will
+result in individual KV's of P2P machines per region to be updated. Once there is change
+the P2P each machines get part of the data and then communicate with each other to get rest of the data.

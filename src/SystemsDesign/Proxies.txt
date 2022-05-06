@@ -1,0 +1,15 @@
+There are 2 types of proxy
+1) Forward Proxy: Sits between client and proxy. Request goes from client to proxy and to server.
+Response goes from server to proxy to client. Source IP address is hidden and replaced by proxy address.
+Forward proxy is more of a client side proxy meaning the server does not know that request is coming from proxy.
+It thinks the client is sending a request.
+eg: VPN on the browser
+
+2) Reverse Proxy: More of a server proxy which means when client sends a request, the request goes to the proxy,
+but the client does not know that because its configured on the server side. The client thinks the request is
+going to server.
+Uses of reverse proxy:
+a) You can filter out requests you dont want to go to the server
+b) Reverse proxy can log stuffs for you. Log metrics etc.
+c) Cache some html pages, so less load on the server
+d) Best use case -> use as load balancer (look at load balancer txt file for info)

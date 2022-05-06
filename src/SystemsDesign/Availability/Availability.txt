@@ -1,0 +1,28 @@
+1) Availability is measured in terms of nines.
+2 nines means your system is 99% available
+3 nines means your system is 99.9% available and so on.
+
+2 nines system is not particulary highly available system, because it means your system will
+not be available for 3.65 days in a year which for critical systems is not good.
+
+4, 5 nines and above are highly available systems
+
+Check the png file attached for breakdown of availability percentages
+
+2) SLA/SLO(Service Level Objectives): Companies have SLA's in place that guarantee the availability
+percentage of their system. Multiple SLO's together makes the SLA. eg: one SLO could be you would encounter only
+this much percentage of error if you use our system
+
+3) You need to analyze if you want highly available systems. Because highly available systems also has
+other downsides such as high latency and low throughput(because you will have to replicate data accross multiple systems). Maybe some parts of your application needs to
+be highly available but not all. For instance payment system, the part of the system which processes payments
+need to be highly available but say they have a dashboard to monitor history, that need not be highly available
+
+4) How to make systems highly available ?
+a) No single points of failure in your system. For instance if you just one server serving all your client then
+its a single point of failure. How to solve this issues => "Redundancy" - Its the idea to add multiple services that
+would do the job. For instance if you have multiple servers and then a loadBalancer your servers are no longer a
+single point of failure but now the loadbalancer is a single point of failure, add multiple load balancers to solve
+the issue. This is known as passive redundancy. One more redundancy is active redundancy where there is a active
+system that is serving and as soon as it goes down, the backup system would take its place
+

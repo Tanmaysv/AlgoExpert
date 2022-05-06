@@ -1,0 +1,89 @@
+(Write functional and non functional requirement, estimates)
+* Requirements
+* non functional requirements
+* capacity estimation
+* high level design
+* detailed design
+* Feedback from Audience/Interviewer
+Keep in mind images are compressed by a service
+Also indexing of tables keep in mind based on search query
+You will have a search service..search based on title
+
+persistant connection?
+snapshot of table?
+trie datastructure for prefix query string search?
+heap datastructure to avoid bottleneck to database? (top 5 posts)
+elastic search, inverted index?
+autocomplete is differenct system then search system?
+discussions around db, column vs row oriented?
+memcache?
+hotspot issue?
+tokenization?
+stemming?
+graph database?
+
+
+Design Quora or reddit (Answer Questions Platform). I was not able to clear this round. Reason for Rejection -->
+(Went with HDFS File System to store question and answers). They asked to tell the differenct between 5 nine and 4 nine.
+How can we improve from 4 nine to 5 nine.
+
+Requirements
+1) Highly Available(10 million users)
+2) Global Application
+3) Lot of concurrent users
+4) User can post a message
+5) Users can upvote message and comment
+
+If user posts a message, ethe request will go through a load balancr, routed to a server. Then a notification is pushed
+to kafka topic and also pushed to user table.
+The topics will be based on subreddit groups. There will be a subreddit table that will store the users subscribed to a subreddit
+
+Sharding will also be done based on subredditId.
+
+When user opens the app, the request will be sent to the particular shard based on the subreddits that user is subscribed to fetch the data
+
+When a new post/comment/like/dislike is posted whilst user is online, the subscibers will be listening to the group they are subscribed
+to and hence can fetch the message
+
+API's
+
+createPost
+  -userId
+  -subredditId
+  -title
+  -description
+
+GetPosts
+-userId
+-subRedditId
+
+CreateComment
+-userId
+-postId
+-msg
+
+GetComment
+-userId
+-postId
+
+sendlike/dislike api
+-userId
+-targetId
+-type
+
+getLike/dislike api
+-userId
+-targetId
+
+Tables
+User table
+Uid PostId SubRedditId TimeStamp
+
+SubReddit Table
+SubRedditId UId
+
+Comments Table
+cid uid postId
+
+Like/Dislike Table
+id targetId(post/comment) type(like/dislike) count

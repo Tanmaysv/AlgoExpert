@@ -1,0 +1,32 @@
+Hashing is used to transform any piece of data to a integer value. The piece of data can anything like IP address,
+user name, http request.
+
+IP based hashing is one of the load balancer routing strategies
+IP based: Hash client request and say hash number is 1, then route it to server number 1. This can be used
+when you are using caching, so that every time a particular client makes a request, it goes to the same server
+where response is cached for that particular client. Otherwise you will miss a lot of cache hits if your
+request randomly goes to different servers
+
+Pre built hashing function that are commonly used MD5, SHA-1, Bcrypt
+
+We use simple hashing where say client name is hashed to a number and we use simple mod operation (mod by number
+of servers) as our hashing function. So say clients C1, C2, C3, C4 hashing value as 11, 12, 13, 14 and the total
+number of servers is 4. Then the request from C1 will be routed to server 1 (11 % 4 = 1), from C2 to server 2
+(12 % 4 = 0) and so on. This simple hashing strategy fails when we increase or decrease the number of servers
+because then the clients would be routed to different servers and there will cache miss.
+To solve this we have two different caching strategies -> consistent hashing and rendezvous hashing
+
+1) Consistent Hashing (Check image added in the folder): Conceptually you can imagine the servers will be
+placed in a circular manner. So server name goes to hashing function and the value that we get is the
+value of the server on the circle. Doing same thing about client, hashing either client ip, name, http request
+and place on the circle as shown in the image. Now each client request will be routed to server which is first
+encountered when you move clockwise from the client. So client C1's and C4's request will go to server A. C3's
+would go to server B C2's to server C and so on. Now say if server C died then C2's request will now go to
+server D so no redoing of calculation is needed. Even if you add new server this logic would still work
+without and rework. You can also have server be positioned at multiple locations in case some servers is not
+getting much traffic or say one of the server A is more powerful, then you can have server A have multiple positions
+
+2) Rendezvous Hashing: For each client we calculate a score for each of the servers. The client request then
+goes to the server with the highest score, if that server is unavailable it would go to the next highest scored
+server. So you can imagine that if a server dies there will be no rework required as the request would simply
+be routed to next highest scored server

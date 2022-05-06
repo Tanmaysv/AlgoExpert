@@ -1,0 +1,29 @@
+1) What is the scope of the system we are designing. What all components will it have ?
+2) Highly available ?
+3) Concurrent users ?
+4) How many regions are we expected to support ?
+5) Are we designing for mobile app as well ?
+6) Are we thinking about designing ui as well ?
+7) From the supply perspective what are the things we are looking for ?
+8) Are we looking to add our own payment service or using third party services or both ?
+9) Are we designing the system keeping in mind that during some sales day due to high traffic,
+we need to autoscale ?
+10) In terms of security aspect what are we looking to keep in mind when designing for ?
+11) How long do we want the user transaction to run for (Max time) and also time to fetch products?
+12) Are we thinking about adding ML prediction capabilites in the system ?
+13) Is there a limit on the number of transaction a user can do per second in order to avoid DOS attack?
+14) Once user purchases a product, I am assuming we need to update the global product info immediately
+ie. have strong consistency. I am assuming dashboard page can have eventual consistency ?
+
+
+User logs in, we will send an api request to fetch the products from products table
+
+Product
+ID, PROD_NAME, QTY, PRICE
+
+User can then search for any products. When user types 3 characters we can send api to fetch products only
+that matches the search. If the products is not avilable we show that.
+
+User can then add any product to the cart. We can store that info in memory.
+
+Once user clicks on checkout, we will update the products table put a lock till update is complete.

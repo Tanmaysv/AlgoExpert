@@ -1,0 +1,13 @@
+1) What would be the scope of this system. Just fetching the news ?
+2) Highly available ?
+3) Number of concurrent users ?
+4) Number of regions ?
+5) Does the system has the concept of following people and then if news is posted by that people/group
+others would be able to see it ? If thats the case is there any limit of max users a particular group
+can have ?
+6) Acceptable latency ?
+7) Does the system have payment feature ?
+8) Once someone has posted a news does it have to be instantly available to users accross region or
+some latency is allowed ?
+9) Do we have to think about recommendation system which would be shown when user logs in ?
+10) Does liking/sharing a post needs to have strong consistency ?

@@ -1,0 +1,15 @@
+- Divide the problem into subproblems, compute it and store the result (memoize it)
+- Time complexity -> (No of subproblems) * Time for each subproblem
+Note: Don't count recursion, because if you use memoization all the work is done during first recursion and result
+is stored so when you take into account the no of subproblems, the recursion work is already taken into account.
+For eg. in fibonacci when you do recursive calls the result is stored in the array, so you dont call recusion
+on computed results, for for fibonacci -> no of subproblems = N, time for each subproblem -> O(1). Time Complexity: O(n)
+
+Two Approaches:
+Bottom up: from first to last
+fib = {}
+for k in range(k):
+    if k <= 2: f = 1
+    else: f = fib[k - 1] + fib[k - 2]
+    fib[k] = f
+return fib[n]

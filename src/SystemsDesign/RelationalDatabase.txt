@@ -1,0 +1,42 @@
+1) Relational DB's have proper structure and rules and schema defined. If you want to add extra value to a table,
+you will have to modify table and add extra column as opposed to in non relation db's you can simply add the
+extra property in your object and store data
+
+Example: Why algoexpert migrate from google cloud db(no sql) to postgres. They were not able to query
+data such as get all user events where date is after some value and user is logged in. Note that google cloud db
+has their own query language. Only single condition clause query could be used.
+But with sql db they are able to use very powerful query condition to retrieve data
+You could say why not just use python script to query data, but note we are talking large scale distribute systems,
+with terabytes of data, so to work with python script you will have to load data in memory which is not feasible.
+SQL query allows you to run queries directly on db
+
+2) SQL db must use ACID transaction
+Atomicity: If there are suboperations to a transaction, either all succeed or all fail. Example debit, credit
+of account. If both are success than transaction is passed, if either one fails, the transaction is rolled back
+example:
+BEGIN TRANSACTION;
+UPDATE BALANCES SET BALANCE = BALANCE - 100 WHERE USERNAME = 'XYZ';
+UPDATE BALANCES SET BALANCE = BALANCE + 100 WHERE USERNAME = 'ABC';
+COMMIT;
+If something fails before commit is complete the transaction will be rolled back
+
+Consistency: No stale state. Query will return same data now or in future
+There are 2 types a) Strong Consistency: Data will become consistent immediately, so two users querying data will
+same value b) Eventual Consistency: Eventually data will become consistent
+
+Isolation: Transactions are done sequentially one after another. So say user 1 updates balance and user 2 updates
+balance at the same time, the user 1 balance will be updated first and then once its complete user 2 balance will
+be updated.
+
+Durability: Effects of transaction is permanent
+
+3) Database Index: It is a auxiliary data structure that is used on columns to make it faster to search data
+in that particular column. For example say you have a column amount in your table, if you have a database index
+on amount column which keeps the amount column sorted, then you can search amount data in O(log n) instead of
+O(n) by performing binary search. Disadvantage you need additional space to store database indexes and when
+you insert data you will have to insert data in database index table as well
+
+Structure of index in database:
+It has 2 cols, search key which is the id of amount column which is stored in sorted order and
+data reference which stores the memory location of the value
+

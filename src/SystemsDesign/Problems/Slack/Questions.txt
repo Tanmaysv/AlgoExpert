@@ -1,0 +1,9 @@
+1) What features ?
+2) Global app ?
+3) no of concurrent users ?
+4) Max latecncy allowed ?
+5) Max users in a group channel ?
+6) HA ?
+7) ACL ?
+8) Do we need to think about sending notifications if a user recieves msg ?
+9) Can a user delete a msg and should it be deleted for all users ?

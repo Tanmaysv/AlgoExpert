@@ -1,0 +1,14 @@
+1) What features are we looking to build in this system ? Just content upload which can be viewed by
+other people or more ?
+2) Is it a global application ?
+3) Number of concurrent users that can view a google drive location ?
+4) The max content size a user can upload at a particular drive location ?
+5) Max latency allowed ?
+6) What kind of content should we think about just text or image etc as well ?
+7) Highly available ?
+8) Once a file is uploaded do we want it to be auto available to users who are already
+in that location or do they need to refresh to get the uploaded file ?
+9) Can a user delete the uploaded file as well ?
+10) Do we need to think about feature wherein a users authorization gets expired and they no longer
+can view the content ?
+

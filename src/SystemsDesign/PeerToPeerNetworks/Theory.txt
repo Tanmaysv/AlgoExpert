@@ -1,0 +1,22 @@
+In peer to peer network the data to be sent is divided into chunks.
+Each of those chunks are sent to individual machines in a P2P network.
+Then its the job of the machines themselves to send and recieve other chunks of data and arrange the
+entire data
+
+Lets take an example. Say you have 5GB of data to be transferred to 1000 machines
+Now if we transfer it all at one go it would be a sequential transaction from the source machine to
+1000 machine which is not ideal. If your network speed is 5 GBPS, it would take 1 s to transfer to 1 machine
+ i.e. 1000s(17 min). Even if we replicate the source data to other machines (10 new machines)
+it still would take a long time(1.7 min) and depending on your use case it would not be ideal.
+So here we can use P2P to split data into small chunks send chunks to individual machines and then
+the machines can communicate among themselves to receive other parts of data.
+
+Now there is a caveat, each machine need to keep a track of what data it needs to receive next and from which
+machine and also what data it needs to send to which machine next. For this we have central machine call
+as tracker. Another way to solve this issue is instead of having central machine, the machine just communicate
+ with each other and figure it out. This is known as Gossip or Epidemic protocol. Every machine has
+ a mapping stored say as hash table which has IP Address and the chunk number that a machine holds.
+ And they can update their mapping based on talking with other machines. This data structure is called
+ "Distributed Hash Table (DHT)". P2P relies heavily on DHT.
+
+ eg: Torrent

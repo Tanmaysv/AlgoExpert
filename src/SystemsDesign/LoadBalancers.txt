@@ -1,0 +1,23 @@
+DNS Round Robin: Is a type of LB, wherein a DNS name has multiple IP address associated with that name
+which is distributed in round robin manner when query requests come in. If you run dig google.com multiple times
+you will get different IP address each time
+
+Different LB's:
+1) Software LB: You can do more in terms customizing/coding based on the requirement than hardware LB
+2) Hardware LB
+
+Ways to load balance i.e. select servers:
+1) Random
+2) Round robin: gurantee even distribution
+3) Weighted round robin: can traffic more request to server with higher weight
+4) LBalance based on performance: Performs health check and if one of the server is not performing well, then
+that LB will not or reduce traffic there
+5) IP based: Hash client request and say hash number is 1, then route it to server number 1. This can be used
+when you are using caching, so that every time a particular client makes a request, it goes to the same server
+where response is cached for that particular client.
+6) Path based: Requests related to particular feature will be routed to a particular server(s). For instance
+request related to payment can be routed to particular sets of servers and related to code execution
+can be routed to different set of servers. eg algoexpert. useful when code deployment of a particular service
+
+You can have multiple load balancers with different server selection strategies
+If your load balancer starts getting overloaded you can have multiple load balancer talking to each other

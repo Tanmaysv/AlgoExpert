@@ -1,0 +1,16 @@
+1) How many regions ?
+2) Concurrent users ?
+3) Max people that can join a subreddit ?
+4) Do we need to discuss authentication subsystem ?
+5) Highly available ?
+6) Do we need to discuss payment system ?
+7) Once a user logs in, do we need to build recommendation system which feeds users posts related to his
+interests ?
+8) Liking a post, is it okay to have eventual consistency ?
+9) Do we need to build a system that recommends user who he can follow ?
+10) Do we need to discuss the ui/mobile app as well ?
+11) Do we need to build system that fetches the trending topics ?
+12) As soon as a user posts, how do we want to notify users, mobile notification only or email as well ?
+13) Max content size a user can post. Is there any limit ?
+14) Do we have to think about reddit live as well, building a system that streams live data ?
+15) Do we have to think about building chat room ?

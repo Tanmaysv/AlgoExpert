@@ -1,0 +1,16 @@
+Each node in a tree will have only parent.
+If it has more than one parent then it will become graph
+Tree will have no cycle and nodes will not be disconnected
+
+Ternary tree: Every node has at most 3 child nodes.
+
+k-ary tree: Every node has at most k child nodes.
+
+Tries - Special type of tree which allows to store characters as nodes
+
+In trees you can have pointers from child node to parent node.
+Most trees don't have this property but you should note that this is possible
+
+Complete k-ary tree: when all nodes are filled except last node and the last node is filled form left to right
+Full k-ary tree: where each node except last has either no children or k children
+Perfect k-ary tree: where all leaves has same depth. You can also say that each level is completely filled

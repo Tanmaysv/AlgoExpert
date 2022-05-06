@@ -1,0 +1,25 @@
+In Linked List the values can be stored anywhere in the memory, unlike arraylist where the value needs to be
+stored in a contiguos manner back to back.
+
+3 -> 1 -> 4 -> 2-> null
+
+Here 3 will be stored at one of the memory location. Next to that location will be the memory address
+where 1 will be stored. Next to 1 value will be the address where 4 will be stored,
+next to which will be the address where 2 will be stored, next to which will be null to indicate
+end of linked list. Two is called as the tail of the ll.
+
+There is no concept of indices in LL unlike array, since there is no index for a value. A value can be
+stored at any memory location
+
+Each element will take 2 memory slot. One for the value and the next for the memory address of next value
+
+Doubly Linked List:
+null <- 3 <=> 1 <=> 4 <=> 2 -> null
+Here each node will take 3 memory slots. One for the value, one to store the location of next value
+and one to store the location of previous value
+
+Circular Linked List:
+The tail will point to the head
+
+
+

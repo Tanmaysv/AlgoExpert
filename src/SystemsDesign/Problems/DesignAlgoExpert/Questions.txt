@@ -1,0 +1,14 @@
+1) Number of concurrent users expected
+2) Which parts of the system needs to be Highly available. I guess payment gateway ?
+3) Number of regions is the system expected to support
+4) Is there a time period in which you expect higher number of user. Is the system expected to support
+autoscalability
+5) The code that user writes do we wnat to persist or just the data
+6) How long do we want all the test cases to run ?
+7) Are the list of questions static. How often do you update the list ?
+
+Part 1: Fetching the questions list from no sql db
+
+Part 2: Code Editor
+
+Part 3: Machines running the test cases against the code and update the status of the code in database

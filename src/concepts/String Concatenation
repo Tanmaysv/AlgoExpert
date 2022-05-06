@@ -1,0 +1,4 @@
+Time complexity of string concatenation is O(n ^ 2) since it creates new string each time
+To avoid n ^ 2 complexity you can create a list and append individual characters and at the end join the
+characters of the list to form the string. This reduces time complexity to O(n).
+I think that is how internally StringBuilder does it in java. Not 100% sure though. Google it

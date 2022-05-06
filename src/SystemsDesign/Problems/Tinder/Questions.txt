@@ -1,0 +1,7 @@
+1) What all features do we need to build in Tinder system - Authentication/Recommendation/ProfileMatching ?
+2) Is this a global application ?
+3) Max number of concurrent users ?
+4) Highly available ?
+5) Acceptable latency ?
+6) Do we need to build messaging chat subsystem as well ?
+7) Max number of swipe right allowed per user ?

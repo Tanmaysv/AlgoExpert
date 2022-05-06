@@ -1,0 +1,39 @@
+Heap can be visualized as a binary tree but its stored in an array
+
+Heap satisfies the following 2 properties:
+1) Completeness: All levels except last are filled and the last level should have nodes from left to right
+2) for Min Heap: Every nodes value must be smaller than child nodes value
+
+Current Node: i
+Left child: 2i + 1
+Right child: 2i + 2
+Parent node: floor((i - 1) / 2)
+
+Operations for min heap:
+Insert: Time O(log(N)) | Space O(1)
+Insert the element at the last index. Compare its value with parent if its value is smaller,
+swap the two elements till. Do this till parent value is less than the child value (This is also called
+as sift up)
+
+Remove: Time O(log(N)) | Space O(1)
+We use heap to remove and get either smallest or largest element. So swap root element with last
+element and remove last element. Then compare the new root with both its children and if the value is greater
+then replace with the smallest of two children, Do this till parent node is less than child node (This is
+also called as sift down)
+
+Sift Up: Time O(log(N)) | Space O(1)
+
+Sift Down: Time O(log(N)) | Space O(1)
+
+Build Heap: Time O(N) | Space O(1)
+You can use either sift up or down. But sift down takes O(N) and sift up takes O(Nlog(N))
+Go to last parent node, check if its value is less than both child if not swap with min child.
+Keep on doing this till root.
+
+Why time complexity is O(N) and not O(Nlog(N)). For all parents of leaf nodes which is majority
+the sift down is constant operation as we do only 1 comparison of parent with child nodes.
+The only time sift down takes O(log(N)) time is for root comparison because you might have to sift down
+from root till leaf. Mathematically the series converges to O(N).
+
+For sift up we will have to sift up all the leaf nodes to the root which is O(log(N)) time and leaf node is
+the majority, that's why sift down is the more efficient operation when building heap

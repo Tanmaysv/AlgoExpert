@@ -1,0 +1,9 @@
+1) Authentication and auth, user needs to have some bank account with balance to buy and sell stocks ?
+2) Is it divided based on state region within a country ?
+3) Highly available ?
+4) Concurrent users ?
+5) Do we need to have replicas of central stock exchange to avoid SPF ?
+6) Do we need strong consistency among the replicas ?
+7) I guess we need to have separate service for settlement, does it need to be highly available as well ?
+8) Do we need to take into account that our system will be communicating with other system to get market data ?
+9) Auto scaling capabilities from 9 to 5 ?

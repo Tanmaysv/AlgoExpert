@@ -1,0 +1,12 @@
+Recursive algorithms will take 0(n) space as it adds function on call stack until all the execution is completed.
+
+Tail Recursion:
+When recursion function call is the last line of code then its called tail recursion.
+Some compilers optimized tail recursion code to just take O(1) space as they will replace the result of the
+last function call with the latest function call. In interview just mention that recursive algorithm do take
+O(n) space which can be avoided though not by all compilers to O(1) space by using tail recursion.
+Some compilers can optimize your normal recursion to just take constant space but dont know how reliable or which
+compilers do that
+
+Convert normal recursion to tail recursion
+https://www.geeksforgeeks.org/tail-recursion/

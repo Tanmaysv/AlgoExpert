@@ -1,0 +1,47 @@
+You can cache at different levels
+1) At client level: so that you dont have to go to server to get data
+2) At server level: so that client request will come to server but you dont have to go to database to get data
+3) In between server and database
+4) At hardware level(not important for systems design interview): Lot of caching does happen at the hardware level
+ eg CPU caches which is done to retrieve data faster from memory
+
+Caching is helpful in below cases:
+1) Too many network requests
+2) To avoid long computation
+
+Examples of Caching:
+1) On algoexpert site the questions list would be loaded the first time, then it is cached on the client level,
+hence you dont see the loader the second time
+
+2) The results when you run the code provided by algoexpert, they have cached the result on server side using redis,
+So when http request is sent, the code checks if the key is present in cache
+
+Caching data that needs to be written. For instance site that allows users to post
+Two types
+1) Write through cache: Data is cached at server level but also stored at the database. If user edits the post
+data is updated at both places. Adv: Data will not be lost if cache is lost. Disadv: Storing at two places and hence
+you have to make the network call every time edit happens
+
+2) Write back cache: Data is only cached at server level, then you can asynchronously have a scheduler to update
+the data in the database say after every 5, 10 mins, or cache eviction time(explained later). Adv: No need to go to database every time request comes.
+Disadv: Data will be lost if cache is lost (other ways to mitigate expalined later)
+
+Things to take care when caching:
+Ex: Youtube comments. Say you have multiple servers with each of them storing comments in cache.
+Now user1 hitting server1 updates the comment, then if user2 hitts server2 will not recieve stale comment. This is
+naive way of designing a system. What you can do, have a common cache for all servers which is updated on comment change
+
+Now there might be certain features of your system which does not matter if the data is stale. For instance
+youtube view count. There you can have the naive way, because its faster
+Caching works well if data is immutable or static. If data is mutable the above things needs to be considered
+
+
+Eviction Policies - We need these policies because you cant store data in cache forever, you need to get rid of data
+eventually:
+1) LRU (Least Recently Used) policy: Get rid of least recently used data
+2) LFU (Least Frequently Used) policy: Get rid of least frequently used data
+3) LIFO (Last in first out)
+4) LILO (Last in last out)
+5) Random
+
+
